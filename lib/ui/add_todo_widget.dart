@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_list_with_cubit/cubit/todo_cubit.dart';
 
 class AddTodoWidget extends StatelessWidget {
   const AddTodoWidget({super.key});
@@ -39,7 +41,13 @@ class AddTodoWidget extends StatelessWidget {
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
-                      // Add save functionality here
+                      // BlocProvider.of<TodoCubit>(context)
+                      //     .addTodo(titleController.text);
+                      context
+                          .read<TodoCubit>()
+                          .addTodo(titleController.text.trim());
+
+                      Navigator.pop(context);
                     },
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 48),
